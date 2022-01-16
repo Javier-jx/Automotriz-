@@ -1,0 +1,89 @@
+<div style="text-align: center; ">
+  <h2>AUTOMOTRIZ</h2>
+  <button type="button" class="btn btn-dark" (click)="open(content)">Alta</button>
+
+<table class= "table">
+  <thead>
+      <tr>
+          <th>ID</th>
+          <th>NOMBRE</th>
+          <th>DESCRIPCION </th>
+          <th>PRECIO </th>
+          <th>COLOR </th>
+          <th>TIPO </th>
+
+
+      </tr>
+
+  </thead>
+  <tbody>
+      <tr *ngFor="let item of collection.data | paginate: config">
+<td>{{item.id}}</td>
+<td>{{item.nombre}}</td>
+<td>{{item.descripcion}}</td>
+<td>{{item.precio}}</td>
+<td>{{item.color}}</td>
+<td>{{item.tipo}}</td>
+
+<td>
+<button type="button" class="btn btn-primary" (click)="openEditar(content,item)">Editar</button>
+  <button type="button" class="btn btn-danger" (click)="eliminar(item)" >Eliminar</button>
+</td>
+      </tr>
+  </tbody>
+
+</table>
+<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">PRODUCTO create/update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+
+        <form [formGroup]="productoForm">
+          <div class="form-group">
+            <label>ID</label>
+            <input type="number" formControlName="id"class="form-control">
+          </div>
+          <div class="form-group">
+            <label>NOMBRE</label>
+            <input type="texto" formControlName="nombre"class="form-control" >
+          </div>
+          <div class="form-group">
+            <label>DESCRIPCION</label>
+            <input type="texto" formControlName="descripcion"class="form-control" >
+          </div>
+          <div class="form-group">
+            <label>PRECIO</label>
+            <input type="number" formControlName="precio"class="form-control" >
+          </div>
+          <div class="form-group">
+            <label>COLOR</label>
+            <input type="texto" formControlName="color"class="form-control" >
+          </div>
+          <div class="form-group">
+            <label>TIPO</label>
+            <input type="texto" formControlName="tipo"class="form-control" >
+          </div>
+
+        </form>
+      </div>
+    </form>
+  </div>
+  <div  class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="guardarProducto()" *ngIf="!actualizar">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="actualizarProducto()" *ngIf="actualizar">Actualizar</button>
+  </div>
+
+</ng-template>
+
+
+</div>
+
+
